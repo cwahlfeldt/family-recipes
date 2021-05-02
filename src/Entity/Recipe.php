@@ -23,6 +23,11 @@ class Recipe
     private $name;
 
     /**
+     * @ORM\Column(type="repeat", length=255)
+     */
+    private $ingredients;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
@@ -31,6 +36,11 @@ class Recipe
      * @ORM\Column(type="text")
      */
     private $recipeText;
+
+    /**
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
+     */
+    private $starCount;
 
     public function getId(): ?int
     {
@@ -71,5 +81,15 @@ class Recipe
         $this->recipeText = $recipeText;
 
         return $this;
+    }
+
+    public function getStarCount(): ?int
+    {
+        return $this->starCount;
+    }
+
+    public function setStarCount($starCount): void
+    {
+        $this->starCount = $starCount;
     }
 }
