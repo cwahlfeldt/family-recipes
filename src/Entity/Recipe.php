@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 /**
  * @ORM\Entity(repositoryClass=RecipeRepository::class)
@@ -23,9 +24,9 @@ class Recipe
     private $name;
 
     /**
-     * @ORM\Column(type="repeat", length=255)
+     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
      */
-    private $ingredients;
+    private $servingSize;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -33,14 +34,9 @@ class Recipe
     private $description;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="array", length=255)
      */
-    private $recipeText;
-
-    /**
-     * @ORM\Column(type="integer", options={"unsigned":true, "default":0})
-     */
-    private $starCount;
+    private $ingredients;
 
     public function getId(): ?int
     {
@@ -71,25 +67,25 @@ class Recipe
         return $this;
     }
 
-    public function getRecipeText(): ?string
+    public function getServingSize(): ?int
     {
-        return $this->recipeText;
+        return $this->servingSize;
     }
 
-    public function setRecipeText(string $recipeText): self
+    public function setServingSize(int $servingSize): self
     {
-        $this->recipeText = $recipeText;
+        $this->servingSize = $servingSize;
 
         return $this;
     }
 
-    public function getStarCount(): ?int
+    public function getIngredients(): ?RepeatedType
     {
-        return $this->starCount;
+        return $this->ingredients;
     }
 
-    public function setStarCount($starCount): void
+    public function setIngredients(RepeatedType $ingredients): void
     {
-        $this->starCount = $starCount;
+        $this->ingredients = $ingredients;
     }
 }
